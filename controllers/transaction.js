@@ -29,6 +29,14 @@ export const searchNearestDriver = async ( /**@type import("express").Request */
             acceptOrder: true,
         });
 
+        if (nearestDriver == null) {
+            return res.status(404).json({ status: "Error", message: "No driver found." });
+        }
+
+        nearestDriver[0].ratings = nearestDriver[0].ratings.toFixed();
+
+        console.log(nearestDriver[0].ratings);
+
         res.status(200).json({ status: "Success", message: "Nearest driver has found.", data: nearestDriver[0] });
         
     } catch (error) {

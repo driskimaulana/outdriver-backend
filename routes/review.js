@@ -15,7 +15,7 @@ import auth from "../middleware/auth.js";
 const router = express.Router();
 
 router.post('/createReview', auth, createReview);
-router.post('/getDriverReviews', auth, getDriverReviews);
+router.get('/getDriverReviews', auth, getDriverReviews);
 router.post('/deleteReview', auth, deleteReview);
 
 export default router;

@@ -11,7 +11,7 @@ import User from "../models/user.js";
 
 export const createReview = async ( /**@type import("express").Request */ req, /**@type import("express").Response */ res) => {
 
-    const { driverId, rating, comment } = req.body;
+    const { transactionId, driverId, rating, comment } = req.body;
     const id = req.userId;
 
     try {
@@ -34,6 +34,7 @@ export const createReview = async ( /**@type import("express").Request */ req, /
         })
 
         const newReview = new Review({
+            transactionId: transactionId,
             customer: {
                 _id: customer._id,
                 name: customer.name,
@@ -87,7 +88,9 @@ export const getDriverReviews = async (/** @type import("express").Request */ re
 
     try {
     
-        const results = await Review.findById(driverId);
+        const results = await Review.find({
+            "driver.id": driverId,
+        });
         if (results == null) {
             return res.status(404).json({ status: "Error", message: "Review not found." });
         }

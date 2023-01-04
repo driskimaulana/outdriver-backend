@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 **/
 
 const reviewSchema = mongoose.Schema({
+    transactionId: {type: String, required: true},
     customer: {
         _id: { type: String, required: true },
         name: { type: String, required: true},
