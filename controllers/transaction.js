@@ -29,13 +29,11 @@ export const searchNearestDriver = async ( /**@type import("express").Request */
             acceptOrder: true,
         });
 
+        console.log(nearestDriver);
+
         if (nearestDriver == null) {
             return res.status(404).json({ status: "Error", message: "No driver found." });
         }
-
-        nearestDriver[0].ratings = nearestDriver[0].ratings.toFixed();
-
-        console.log(nearestDriver[0].ratings);
 
         res.status(200).json({ status: "Success", message: "Nearest driver has found.", data: nearestDriver[0] });
         
@@ -85,6 +83,7 @@ export const createTransaction = async ( /**@type import("express").Request */ r
             cost: cost,
             paymentMethod: paymentMethod,
         });
+        
 
         const result = await newTransaction.save((err, message) => {
             if(err) {
