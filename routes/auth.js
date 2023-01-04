@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { signIn, signUp, getAllDrivers, getUserLoggedin, refreshLocation } from '../controllers/user.js';
+import { signIn, signUp, getAllDrivers, getUserLoggedin, refreshLocation, changeAcceptOrder } from '../controllers/user.js';
 
 import auth from '../middleware/auth.js';
 
@@ -19,5 +19,6 @@ router.post('/signin', signIn);
 router.get('/allDrivers', getAllDrivers);
 router.post('/getLoggedinUser', auth, getUserLoggedin);
 router.post('/refreshLocation', auth, refreshLocation);
+router.get('/changeAcceptOrder', auth, changeAcceptOrder);
 
 export default router;

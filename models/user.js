@@ -8,17 +8,6 @@ import mongoose from "mongoose";
 * Description: user model
 **/
 
-const locationSchema = mongoose.Schema({
-    type: {
-        type: String,
-        required: true,
-    },
-    coordinates: {
-        type: [], 
-        default: [],
-    }
-})
-
 const userSchema = mongoose.Schema({
 	name: { type: String, required: true },
 	email: { type: String, required: true },
@@ -26,14 +15,10 @@ const userSchema = mongoose.Schema({
 	password: { type: String, required: true },
 	id: { type: String},
 	role: { type: String, required: true },
+	acceptOrder: { type: Boolean },
 	ratings: { type: Number, default: 0 },
 	ratingsCount: { type: Number, default: 0 },
 	ratingsTotal: { type: Number, default: 0 },
-	// location: {
-	// 	type: [],
-	// 	default: [],
-	// },
-	// location: locationSchema,
 	location: {
 		type: {
 			type: String,

@@ -25,7 +25,8 @@ export const searchNearestDriver = async ( /**@type import("express").Request */
                     }
                 }
             },
-            role: "Driver"
+            role: "Driver",
+            acceptOrder: true,
         });
 
         res.status(200).json({ status: "Success", message: "Nearest driver has found.", data: nearestDriver[0] });

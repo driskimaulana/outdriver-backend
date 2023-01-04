@@ -137,3 +137,32 @@ export const refreshLocation = async (/**@type import("express").Request */ req,
 	}
 
 }
+
+export const changeAcceptOrder = async (/**@type import("express").Request */ req, /**@type import("express").Response */ res) => {
+
+	const id = req.userId;
+	
+	try {
+		const userLoggedin = await User.findById(id);
+		
+		if(!userLoggedin) {
+			return res.status(404).json({ status: "Error", message: `User with id ${id} is not found.` });
+		}
+
+		if (userLoggedin.role === "Customer") {
+			return res.status(404).json({ status: "Error", message: `User with id ${id} is not a driver.` });
+		}
+		
+		userLoggedin.acceptOrder = !userLoggedin.acceptOrder;
+
+		await userLoggedin.save().then(savedDoc => {
+			savedDoc === userLoggedin;
+		});
+
+		res.status(200).json({ status: "Success", message: "Successfully update driver accept order status.", data: userLoggedin});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ status: "Error", message: "Something went wrong." });
+	}
+
+}
