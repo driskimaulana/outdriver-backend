@@ -187,5 +187,47 @@ export const doneTransaction = async ( /**@type import("express").Request */ req
 
 }
 
+export const getTransactionByCustomerId = async ( /**@type import("express").Request */ req, /**@type import("express").Response */ res) => {
+    const userId = req.userId;
+
+    try {
+        
+        const transactions = await Transaction.find({
+            "customer._id": userId,
+        });
+
+        if (transactions == null) {
+            res.status(404).json({ status: "Error", message: "No transactions found with this user id" });
+        }
+
+        res.status(200).json({ status: "Success", message: "Fetch transactions success.", data: transactions });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: "Something went wrong." });
+    }
+
+}
+
+export const getTransactionByDriverId = async ( /**@type import("express").Request */ req, /**@type import("express").Response */ res) => {
+    const userId = req.userId;
+
+    try {
+        
+        const transactions = await Transaction.find({
+            "driver._id": userId,
+        });
+
+        console.log(transactions);
+
+        if (transactions == null) {
+            return res.status(404).json({ status: "Error", message: "No transactions found with this driver id" });
+        }
+
+        res.status(200).json({ status: "Success", message: "Fetch transactions success.", data: transactions });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: "Something went wrong." });
+    }
+
+}
+
 
 

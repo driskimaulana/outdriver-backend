@@ -1,5 +1,5 @@
 import express from "express";
-import { createTransaction, searchNearestDriver, getTransaction, acceptTransaction, rejectTransaction, deleteTransaction, doneTransaction } from "../controllers/transaction.js"
+import { createTransaction, searchNearestDriver, getTransaction, acceptTransaction, rejectTransaction, deleteTransaction, doneTransaction, getTransactionByCustomerId, getTransactionByDriverId } from "../controllers/transaction.js"
 
 import auth from "../middleware/auth.js";
 
@@ -20,6 +20,8 @@ router.post('/acceptTransaction', auth, acceptTransaction);
 router.post('/rejectTransaction', auth, rejectTransaction);
 router.post('/deleteTransaction', auth, deleteTransaction);
 router.post('/doneTransaction', auth, doneTransaction);
+router.get('/getTransactionByCustomerId', auth, getTransactionByCustomerId);
+router.get('/getTransactionByDriverId', auth, getTransactionByDriverId);
 
 
 export default router;
