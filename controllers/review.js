@@ -91,11 +91,11 @@ export const getDriverReviews = async (
   /** @type import("express").Request */ req,
   /** @type import("express").Responses */ res
 ) => {
-  const { driverId } = req.body;
+  const driverId = req.userId;
 
   try {
     const results = await Review.find({
-      "driver.id": driverId,
+      "driver._id": driverId,
     });
     if (results == null) {
       return res
